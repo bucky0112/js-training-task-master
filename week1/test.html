@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <ul class="list"></ul>
+    </div>
+
+    <script>
+        const url = 'https://data.taipei/api/v1/dataset/c2b666e0-f848-4609-90cb-5e416435b93a?scope=resourceAquire';
+        const cors = 'https://cors-anywhere.herokuapp.com/';
+
+        let data;
+        let num = 0;
+        const scooterCharge = [];
+        const chargeLocation = [];
+
+        axios.get(cors + url).then(response =>{
+            data = response.data;
+            setting();
+            // console.log(data);
+            // console.log(data.result.results.length)
+        });
+
+        function setting() {
+            data.forEach((item) => {
+                if(item['行政區'] == '萬華區') {
+                    scooterCharge.push(item['備註']);
+                    num += 1;
+                    console.log(data)
+                }
+            }); 
+        }
+    </script>
+</body>
+</html>
